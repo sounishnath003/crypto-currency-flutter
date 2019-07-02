@@ -9,13 +9,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Crypto Currency App',
-      // theme: new ThemeData(
-      //   accentColor: Colors.tealAccent,
-      //   primaryColor: Colors.white,
-      //   primaryIconTheme: IconThemeData(color: Colors.deepOrangeAccent)
-      //   //fontFamily: 
-      // ),
+      theme: new ThemeData(
+        accentColor: Colors.tealAccent,
+        primaryColor: Colors.white,
+        primaryIconTheme: IconThemeData(color: Colors.black)
+        //fontFamily: 
+      ),
       home: MyHomePage(),
     );
   }

@@ -12,7 +12,10 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 3.0,
           actions: <Widget>[
-            new Icon(Icons.line_style)
+            new Icon(Icons.list,
+            size: 30.0,
+            ),
+            new SizedBox(width: 16.0,)
           ],
       ),
     );
