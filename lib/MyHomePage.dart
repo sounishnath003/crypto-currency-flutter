@@ -1,7 +1,8 @@
 import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as  http;
+import 'Cryptos.dart';
+import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -10,34 +11,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-void _pushSaved() {}
+  void _pushSaved() {}
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-      title: new Text("CryptoList"),
-      centerTitle: true,
-      backgroundColor: Colors.white,
-      elevation: 3.0,
-      actions: <Widget>[
-        new IconButton(
-          icon: Icon(
-            Icons.list,
-            size: 30.0,
-          ),
-          onPressed: _pushSaved,
-        ),
-        new SizedBox(
-          width: 16.0,
-        )
-      ]),
+          title: new Text("CryptoList"),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 3.0,
+          actions: <Widget>[
+            new IconButton(
+              icon: Icon(
+                Icons.list,
+                size: 30.0,
+              ),
+              onPressed: _pushSaved,
+            ),
+            new SizedBox(
+              width: 16.0,
+            )
+          ]),
       body: AppBody(),
     );
   }
 }
-
 
 class AppBody extends StatefulWidget {
   AppBody({Key key}) : super(key: key);
@@ -46,34 +45,50 @@ class AppBody extends StatefulWidget {
 }
 
 class _AppBodyState extends State<AppBody> {
-List _cryptoList ;
+  Cryptos crypto;
+  List crytoLists;
 
-Future<void> getCryptoPrices() async {
-  print("getting: crypto prices") ;
-  String _apiUrl = "https://api.coinmarketcap.com/v1/ticker/";
-  http.Response response = await http.get(_apiUrl);
-
-  if(response.statusCode == 200) {
-    jsonDecode(response.body);
-  } else {
-    throw("Error Unexpectedly Occurs...");
+  Future<void> _getCryptos() async {
+    const _apiUrl = "https://api.coinmarketcap.com/v1/ticker/";
+    final url = await http.get(_apiUrl);
+    if (url.statusCode == 200) {
+      var decodeJson = jsonDecode(url.body);
+      print(decodeJson);
+      crypto = Cryptos.fromJson(decodeJson);
+      crytoLists = crypto as List;
+    } else {
+      throw ("error happened...");
+    }
   }
-
-  setState(() {
-      this._cryptoList =
-          jsonDecode(response.body); //sets the state of our widget
-      print(_cryptoList); //prints the list
-    });
-    return ;
-}
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(10.0),
-        child: Expanded(
+    return new FutureBuilder(
+      future: _getCryptos(),
+      initialData: 56,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return new Text("Press Button to start");
+            break;
 
-        )
+            case ConnectionState.active:
+            return new Text("In progess...");
+            break;
+            
+            case ConnectionState.waiting:
+            return new Center(child: new CircularProgressIndicator());
+            break ;
+            
+            case ConnectionState.done:
+            if (snapshot.hasError) {} 
+            else {
+              
+            }
+            break;
+          default:
+        }
+      },
     );
   }
 }
