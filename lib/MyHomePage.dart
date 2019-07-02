@@ -63,32 +63,52 @@ class _AppBodyState extends State<AppBody> {
 
   @override
   Widget build(BuildContext context) {
-    return new FutureBuilder(
-      future: _getCryptos(),
-      initialData: 56,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return new Text("Press Button to start");
-            break;
+    return RefreshIndicator(
+      child: new FutureBuilder(
+        future: _getCryptos(),
+        initialData: 56,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return new Text("Press Button to start");
+              break;
 
             case ConnectionState.active:
-            return new Text("In progess...");
-            break;
-            
+              return new Text("In progess...");
+              break;
+
             case ConnectionState.waiting:
-            return new Center(child: new CircularProgressIndicator());
-            break ;
-            
+              return new Center(child: new CircularProgressIndicator());
+              break;
+
             case ConnectionState.done:
-            if (snapshot.hasError) {} 
-            else {
-              
-            }
-            break;
-          default:
-        }
-      },
+              if (snapshot.hasError) {
+                return Container(
+                    child: new Center(
+                        child: new Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                      new Padding(
+                        child: new Text("Error Happen : '${snapshot.error}'"),
+                        padding: EdgeInsets.all(40.0),
+                      )
+                    ])));
+              } else {
+                return new SafeArea(
+                  child: new ListView.builder(
+                      itemCount: crytoLists.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          new ListTile(
+                            leading: new Text(crytoLists[index].name),
+                          )),
+                );
+              }
+              break;
+            default:
+          }
+        },
+      ),
+      onRefresh: _getCryptos,
     );
   }
 }
