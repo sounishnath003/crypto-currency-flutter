@@ -45,70 +45,29 @@ class AppBody extends StatefulWidget {
 }
 
 class _AppBodyState extends State<AppBody> {
-  Cryptos crypto;
-  List crytoLists;
+  var _apiUrl = "https://api.coinmarketcap.com/v1/ticker/";
+  List data ;
 
-  Future<void> _getCryptos() async {
-    const _apiUrl = "https://api.coinmarketcap.com/v1/ticker/";
-    final url = await http.get(_apiUrl);
-    if (url.statusCode == 200) {
-      var map = jsonDecode(url.body) ;
-      print(map);
-      crypto = Cryptos.fromJson(map);
-      crytoLists = crypto as List;
-    } else {
-      throw ("error happened...");
-    }
+  @override
+  void initState() { 
+    super.initState();
+    this.getJsonData();
+  }  
+
+  Future<String> getJsonData() async {
+    http.Response response = await http.get(
+      Uri.encodeFull(_apiUrl),
+      headers: {"Accept": "applicaiton/json"}
+    );
+
+    print(response.body);
   }
+
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      child: new FutureBuilder(
-        future: _getCryptos(),
-        initialData: 56,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              return new Text("Press Button to start");
-              break;
-
-            case ConnectionState.active:
-              return new Text("In progess...");
-              break;
-
-            case ConnectionState.waiting:
-              return new Center(child: new CircularProgressIndicator());
-              break;
-
-            case ConnectionState.done:
-              if (snapshot.hasError) {
-                return Container(
-                    child: new Center(
-                        child: new Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                      new Padding(
-                        child: new Text("Error Happen : '${snapshot.error}'"),
-                        padding: EdgeInsets.all(40.0),
-                      )
-                    ])));
-              } else {
-                return new SafeArea(
-                  child: new ListView.builder(
-                      itemCount: crytoLists.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          new ListTile(
-                            leading: new Text("Hi There"),
-                          )),
-                );
-              }
-              break;
-            default:
-          }
-        },
-      ),
-      onRefresh: _getCryptos,
+    return Center(
+          child: new Text("Hi Sounish")
     );
   }
 }
