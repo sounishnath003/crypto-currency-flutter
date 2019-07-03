@@ -19,8 +19,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
           title: new Text("CryptoList"),
           centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 3.0,
+          backgroundColor: Colors.deepOrangeAccent,
+          elevation: 8.0,
           actions: <Widget>[
             new IconButton(
               icon: Icon(
@@ -95,7 +95,7 @@ class _AppBodyState extends State<AppBody> {
                             padding: const EdgeInsets.all(3.0),
                             child: new ExpansionTile(
                               leading: new CircleAvatar(
-                                backgroundColor: Colors.indigoAccent,
+                                backgroundColor: Colors.black,
                                 child: new Text(
                                   data[index]['name'][0],
                                   style: new TextStyle(
