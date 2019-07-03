@@ -47,14 +47,19 @@ class MyHomeScreenState extends State<MyHomeScreen> {
           }
           if (currentState is ErrorMyHomeState) {
             return new Container(
-              child: new Center(
-              child: new Text(currentState.errorMessage ?? 'Error' ),
+                child: new Center(
+              child: new Text(currentState.errorMessage ?? 'Error'),
             ));
           }
-          return new Container(
-              child: new Center(
-            child: new Text("В разработке"),
-          ));
+          return new SafeArea(
+            child: Center(
+              child: new ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (BuildContext context, int index) => new ListTile(
+                        leading: new Text("Hi There"),
+                      )),
+            ),
+          );
         });
   }
 }
