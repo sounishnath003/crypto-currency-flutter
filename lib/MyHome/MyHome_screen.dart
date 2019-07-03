@@ -51,15 +51,18 @@ class MyHomeScreenState extends State<MyHomeScreen> {
               child: new Text(currentState.errorMessage ?? 'Error'),
             ));
           }
-          return new SafeArea(
+          if (currentState is InMyHomeState) {
+            final cryptosData = currentState.cryptos as List ;
+            return new SafeArea(
             child: Center(
               child: new ListView.builder(
-                  itemCount: 5,
+                  itemCount: 56 ,
                   itemBuilder: (BuildContext context, int index) => new ListTile(
-                        leading: new Text("Hi There"),
+                        leading: new Text("Hi Sounish"),
                       )),
             ),
           );
+          }
         });
   }
 }

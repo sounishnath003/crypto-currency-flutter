@@ -1,3 +1,4 @@
+import 'package:crypto_currency/MyHome/MyHome_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -22,12 +23,15 @@ class UnMyHomeState extends MyHomeState {
 
 /// Initialized
 class InMyHomeState extends MyHomeState {
+  final List<Map> cryptos ;
+
+  InMyHomeState(this.cryptos);
   @override
   String toString() => 'InMyHomeState';
 
   @override
   MyHomeState getStateCopy() {
-    return InMyHomeState();
+    return InMyHomeState(cryptos);
   }
 }
 

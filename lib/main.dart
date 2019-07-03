@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Crypto Currency App',
       theme: new ThemeData(
-        accentColor: Colors.tealAccent,
+        accentColor: Colors.blue,
         primaryColor: Colors.white,
         primaryIconTheme: IconThemeData(color: Colors.black)
         //fontFamily: 

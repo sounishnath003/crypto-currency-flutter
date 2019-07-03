@@ -18,8 +18,9 @@ class LoadMyHomeEvent extends MyHomeEvent {
       {MyHomeState currentState, MyHomeBloc bloc}) async {
     try {
       await Future.delayed(new Duration(seconds: 2));
-      this._myHomeProvider.test();
-      return new InMyHomeState();
+      //this._myHomeProvider.test();
+      List<Map> res = await _myHomeProvider.getData() ;
+      return new InMyHomeState(res);
     } catch (_, stackTrace) {
       print('$_ $stackTrace');
       return new ErrorMyHomeState(_?.toString());
