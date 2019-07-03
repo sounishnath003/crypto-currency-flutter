@@ -59,15 +59,42 @@ class _AppBodyState extends State<AppBody> {
       Uri.encodeFull(_apiUrl),
       headers: {"Accept": "applicaiton/json"}
     );
-
     print(response.body);
+
+  // rebuilding UI widget
+  setState(() {
+   var _convertDataToJson = jsonDecode(response.body) ;
+   data = _convertDataToJson;
+  });
+
+  return "Success" ;
+
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-          child: new Text("Hi Sounish")
+    return new Container(
+      child: Card(
+        elevation: 3.0,
+        child: new ListView.builder(
+          itemCount: data == null ? 0 : data.length,
+          itemBuilder: (BuildContext context, int index) => new Container(
+            //padding: const EdgeInsets.all(12.0),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                new Card(
+                  child:  new ExpansionTile(
+                    //leading: data[index]['name'],
+                    title: new Text(data[index]['name']),
+                                      )
+                )
+              ],
+            ),
+          ) ,
+        )
+      ),
     );
   }
 }
