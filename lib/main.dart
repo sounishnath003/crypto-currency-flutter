@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         accentColor: Colors.blue,
         primaryColor: Colors.white,
+        fontFamily: "Product",
         primaryIconTheme: IconThemeData(color: Colors.black)
         //fontFamily: 
       ),
