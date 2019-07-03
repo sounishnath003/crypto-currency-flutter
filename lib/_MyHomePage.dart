@@ -29,9 +29,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onPressed: _pushSaved,
             ),
+            new IconButton(
+              icon: Icon(
+                Icons.search,
+                size: 30.0,
+              ),
+              onPressed: _pushSaved,
+            ),
             new SizedBox(
-              width: 16.0,
-            )
+              width: 5.0,
+            ),
           ]),
       body: AppBody(),
     );
@@ -70,116 +77,119 @@ class _AppBodyState extends State<AppBody> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: new Container(
-        child: Card(
-            elevation: 3.0,
-            child: new ListView.builder(
-              itemCount: data == null ? 0 : data.length,
-              itemBuilder: (BuildContext context, int index) => new Container(
-                    //padding: const EdgeInsets.all(12.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        new Card(
-                            child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: new ExpansionTile(
-                            leading: new CircleAvatar(
-                              backgroundColor: Colors.indigoAccent,
-                              child: new Text(
-                                data[index]['name'][0],
-                                style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
+    return RefreshIndicator(
+      onRefresh: getJsonData,
+          child: SafeArea(
+        child: new Container(
+          child: Card(
+              elevation: 3.0,
+              child: new ListView.builder(
+                itemCount: data == null ? 0 : data.length,
+                itemBuilder: (BuildContext context, int index) => new Container(
+                      //padding: const EdgeInsets.all(12.0),
+                      child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          new Card(
+                              child: Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: new ExpansionTile(
+                              leading: new CircleAvatar(
+                                backgroundColor: Colors.indigoAccent,
+                                child: new Text(
+                                  data[index]['name'][0],
+                                  style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
+                                foregroundColor: Colors.white,
                               ),
-                              foregroundColor: Colors.white,
+                              title: new Text(data[index]['name']),
+                              trailing: new Text(
+                                "\$ " + data[index]['price_usd'],
+                                style: new TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              children: <Widget>[
+                                new ListTileTheme(
+                                  style: ListTileStyle.list,
+                                  selectedColor: Colors.yellow,
+                                  child: new Column(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 12.0),
+                                        child: new Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            new Text(
+                                              'Rank: ' + data[index]['rank'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                            SizedBox(height: 11.0),
+                                            new Text(
+                                              'Symbol: ' + data[index]['symbol'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                            SizedBox(height: 11.0),
+                                            new Text(
+                                              'Price btc: ' +
+                                                  data[index]['price_btc'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                            SizedBox(height: 11.0),
+                                            new Text(
+                                              'Price btc: ' +
+                                                  data[index]['price_btc'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                            SizedBox(height: 11.0),
+                                            new Text(
+                                              'total_supply: ' +
+                                                  data[index]['total_supply'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                            SizedBox(height: 11.0),
+                                            new Text(
+                                              'percent_change_24h: ' +
+                                                  data[index]
+                                                      ['percent_change_24h'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                            SizedBox(height: 11.0),
+                                            new Text(
+                                              'last_updated: ' +
+                                                  data[index]['last_updated'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            title: new Text(data[index]['name']),
-                            trailing: new Text(
-                              "\$ " + data[index]['price_usd'],
-                              style: new TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            children: <Widget>[
-                              new ListTileTheme(
-                                style: ListTileStyle.list,
-                                selectedColor: Colors.yellow,
-                                child: new Column(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12.0),
-                                      child: new Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          new Text(
-                                            'Rank: ' + data[index]['rank'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(height: 11.0),
-                                          new Text(
-                                            'Symbol: ' + data[index]['symbol'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(height: 11.0),
-                                          new Text(
-                                            'Price btc: ' +
-                                                data[index]['price_btc'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(height: 11.0),
-                                          new Text(
-                                            'Price btc: ' +
-                                                data[index]['price_btc'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(height: 11.0),
-                                          new Text(
-                                            'total_supply: ' +
-                                                data[index]['total_supply'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(height: 11.0),
-                                          new Text(
-                                            'percent_change_24h: ' +
-                                                data[index]
-                                                    ['percent_change_24h'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                          SizedBox(height: 11.0),
-                                          new Text(
-                                            'last_updated: ' +
-                                                data[index]['last_updated'],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ))
-                      ],
+                          ))
+                        ],
+                      ),
                     ),
-                  ),
-            )),
+              )),
+        ),
       ),
     );
   }
