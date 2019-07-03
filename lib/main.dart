@@ -1,5 +1,6 @@
-import 'package:crypto_currency/MyHomePage.dart';
 import 'package:flutter/material.dart';
+
+import 'MyHome/index.dart';
 
 void main () => runApp(new MyApp());
 

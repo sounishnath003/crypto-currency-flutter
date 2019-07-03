@@ -52,9 +52,9 @@ class _AppBodyState extends State<AppBody> {
     const _apiUrl = "https://api.coinmarketcap.com/v1/ticker/";
     final url = await http.get(_apiUrl);
     if (url.statusCode == 200) {
-      var decodeJson = jsonDecode(url.body);
-      print(decodeJson);
-      crypto = Cryptos.fromJson(decodeJson);
+      var map = jsonDecode(url.body) ;
+      print(map);
+      crypto = Cryptos.fromJson(map);
       crytoLists = crypto as List;
     } else {
       throw ("error happened...");
@@ -99,7 +99,7 @@ class _AppBodyState extends State<AppBody> {
                       itemCount: crytoLists.length,
                       itemBuilder: (BuildContext context, int index) =>
                           new ListTile(
-                            leading: new Text(crytoLists[index].name),
+                            leading: new Text("Hi There"),
                           )),
                 );
               }
