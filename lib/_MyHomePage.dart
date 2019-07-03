@@ -107,14 +107,66 @@ class _AppBodyState extends State<AppBody> {
                                 child: new Column(
                                   children: <Widget>[
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12.0),
                                       child: new Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: <Widget>[
-                                          new Text('Rank: ' + data[index]['rank'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
-                                          new Text('Symbol: ' + data[index]['symbol'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
-                                          new Text('Price btc: ' + data[index]['price_btc'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
-                                          new Text('Price btc: ' + data[index]['price_btc'], style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
+                                          new Text(
+                                            'Rank: ' + data[index]['rank'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
+                                          SizedBox(height: 11.0),
+                                          new Text(
+                                            'Symbol: ' + data[index]['symbol'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
+                                          SizedBox(height: 11.0),
+                                          new Text(
+                                            'Price btc: ' +
+                                                data[index]['price_btc'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
+                                          SizedBox(height: 11.0),
+                                          new Text(
+                                            'Price btc: ' +
+                                                data[index]['price_btc'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
+                                          SizedBox(height: 11.0),
+                                          new Text(
+                                            'total_supply: ' +
+                                                data[index]['total_supply'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
+                                          SizedBox(height: 11.0),
+                                          new Text(
+                                            'percent_change_24h: ' +
+                                                data[index]
+                                                    ['percent_change_24h'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
+                                          SizedBox(height: 11.0),
+                                          new Text(
+                                            'last_updated: ' +
+                                                data[index]['last_updated'],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 17),
+                                          ),
                                         ],
                                       ),
                                     )
@@ -147,10 +199,9 @@ class _AnswerWidgetState extends State<AnswerWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new ListTile(
-        title: new Text(widget.data[widget.index][widget.m],
-      )
-    )
-    );
-    }
+        child: new ListTile(
+            title: new Text(
+      widget.data[widget.index][widget.m],
+    )));
+  }
 }
