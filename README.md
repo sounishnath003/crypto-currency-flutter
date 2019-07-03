@@ -2,6 +2,14 @@
 
 A new Flutter project.
 
+
+# App Dashboard
+![ss-1](s1.jpg)
+
+## second view
+![ss-1](s2.jpg)
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
